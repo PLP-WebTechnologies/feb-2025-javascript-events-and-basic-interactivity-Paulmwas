@@ -2,461 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>JS Event Handling & Interactive Elements Assignment</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3 Animations & LocalStorage Demo</title>
     <style>
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #f7f8fa;
-            margin: 0;
-            padding: 0;
-            color: #222;
-        }
-        header {
-            background: linear-gradient(90deg, #6a82fb, #fc5c7d);
-            color: #fff;
-            padding: 2rem 1rem 1rem 1rem;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            font-family: Arial, sans-serif;
             padding: 2rem;
+            background: #f5f6fa;
         }
-        /* Button Styles */
-        .magic-btn {
-            background: #6a82fb;
-            color: #fff;
-            border: none;
+
+        .animated-btn {
             padding: 1rem 2rem;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
-            margin-bottom: 1rem;
-            outline: none;
-        }
-        .magic-btn:hover {
-            background: #fc5c7d;
-            transform: scale(1.05) rotate(-2deg);
-        }
-        .magic-btn:active {
-            background: #4e54c8;
-        }
-        /* Keypress Display */
-        .keypress-display {
-            margin: 1rem 0;
+            background: #4f8cff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
             font-size: 1.2rem;
-            color: #6a82fb;
-            min-height: 1.5em;
-        }
-        /* Gallery */
-        .gallery {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        .gallery img {
-            width: 240px;
-            height: 160px;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-        }
-        .gallery img.active {
-            border: 3px solid #fc5c7d;
-            transform: scale(1.05);
-        }
-        .gallery button {
-            background: #eee;
-            border: none;
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            font-size: 1.3rem;
             cursor: pointer;
-            transition: background 0.2s;
-        }
-        .gallery button:hover {
-            background: #fc5c7d;
-            color: #fff;
-        }
-        /* Tabs */
-        .tabs {
-            margin: 2rem 0;
-        }
-        .tab-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-        .tab-btn {
-            background: #eee;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 8px 8px 0 0;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.2s;
-        }
-        .tab-btn.active {
-            background: #6a82fb;
-            color: #fff;
-        }
-        .tab-content {
-            border: 1px solid #eee;
-            border-radius: 0 0 8px 8px;
-            padding: 1rem;
-            background: #f9f9fb;
-            min-height: 60px;
-            animation: fadeIn 0.4s;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
-        /* Accordion */
-        .accordion {
-            margin: 2rem 0;
-        }
-        .accordion-item {
-            margin-bottom: 0.5rem;
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-        }
-        .accordion-title {
-            background: #6a82fb;
-            color: #fff;
-            padding: 0.8rem 1rem;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.2s;
-        }
-        .accordion-title:hover {
-            background: #fc5c7d;
-        }
-        .accordion-content {
-            background: #f9f9fb;
-            padding: 1rem;
-            display: none;
-            animation: fadeIn 0.3s;
-        }
-        .accordion-content.active {
-            display: block;
-        }
-        /* Form */
-        form {
-            margin: 2rem 0;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            background: #f7f8fa;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        label {
-            font-weight: 500;
-            margin-bottom: 0.3rem;
-        }
-        input[type="text"], input[type="email"], input[type="password"] {
-            padding: 0.7rem;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border 0.2s;
-        }
-        input:focus {
-            border-color: #6a82fb;
+            transition: background 0.3s;
             outline: none;
+            margin-bottom: 1rem;
         }
-        .form-feedback {
-            font-size: 0.95rem;
-            margin-top: 0.2rem;
-            min-height: 1.2em;
+
+        .animated-btn:hover {
+            background: #357ae8;
         }
-        .form-feedback.error {
-            color: #fc5c7d;
+
+        /* CSS Animation */
+        .pulse {
+            animation: pulse 0.6s;
         }
-        .form-feedback.success {
-            color: #6a82fb;
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
         }
-        .submit-btn {
-            background: #fc5c7d;
-            color: #fff;
-            border: none;
-            padding: 0.9rem 2rem;
-            border-radius: 8px;
-            font-size: 1.1rem;
+
+        .theme-toggle {
+            margin-top: 1rem;
             cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 0.5rem;
+            color: #4f8cff;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            font-size: 1rem;
         }
-        .submit-btn:hover {
-            background: #6a82fb;
+
+        body.dark {
+            background: #23272f;
+            color: #f5f6fa;
         }
-        /* Responsive */
-        @media (max-width: 600px) {
-            .gallery img { width: 100px; height: 70px;}
-            .container { padding: 1rem;}
+        body.dark .animated-btn {
+            background: #23272f;
+            color: #4f8cff;
+            border: 1px solid #4f8cff;
+        }
+        body.dark .animated-btn:hover {
+            background: #4f8cff;
+            color: #23272f;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>🎯 JS Event Handling & Interactive Elements</h1>
-        <p>Make your web pages come alive!</p>
-    </header>
-    <div class="container">
-        <!-- Event Handling Section -->
-        <section>
-            <h2>1. Event Handling 🎈</h2>
-            <button class="magic-btn" id="changeBtn">Click Me!</button>
-            <div class="keypress-display" id="keypressDisplay">Press any key...</div>
-            <button class="magic-btn" id="secretBtn" title="Try double-click or long press!">Secret Action</button>
-        </section>
+    <h1>CSS3 Animations & LocalStorage Demo</h1>
+    <button class="animated-btn" id="animateBtn">Click Me!</button>
+    <br>
+    <button class="theme-toggle" id="themeToggle">Toggle Dark Mode</button>
 
-        <!-- Interactive Elements Section -->
-        <section>
-            <h2>2. Interactive Elements 🎮</h2>
-            <!-- Image Gallery -->
-            <div class="gallery">
-                <button id="prevImg" aria-label="Previous Image">&lt;</button>
-                <img id="galleryImg" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Gallery Image" class="active">
-                <button id="nextImg" aria-label="Next Image">&gt;</button>
-            </div>
-            <!-- Tabs -->
-            <div class="tabs">
-                <div class="tab-buttons">
-                    <button class="tab-btn active" data-tab="tab1">Tab 1</button>
-                    <button class="tab-btn" data-tab="tab2">Tab 2</button>
-                    <button class="tab-btn" data-tab="tab3">Tab 3</button>
-                </div>
-                <div class="tab-content" id="tab1">Welcome to Tab 1! 🎉</div>
-                <div class="tab-content" id="tab2" style="display:none;">This is Tab 2. More content here!</div>
-                <div class="tab-content" id="tab3" style="display:none;">Tab 3 says hello! 👋</div>
-            </div>
-            <!-- Accordion -->
-            <div class="accordion">
-                <div class="accordion-item">
-                    <div class="accordion-title">Accordion 1</div>
-                    <div class="accordion-content">This is the content of Accordion 1.</div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-title">Accordion 2</div>
-                    <div class="accordion-content">This is the content of Accordion 2.</div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-title">Accordion 3</div>
-                    <div class="accordion-content">This is the content of Accordion 3.</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Form Validation Section -->
-        <section>
-            <h2>3. Form Validation 📋✅</h2>
-            <form id="signupForm" novalidate>
-                <div>
-                    <label for="name">Name *</label>
-                    <input type="text" id="name" name="name" required>
-                    <div class="form-feedback" id="nameFeedback"></div>
-                </div>
-                <div>
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" required>
-                    <div class="form-feedback" id="emailFeedback"></div>
-                </div>
-                <div>
-                    <label for="password">Password *</label>
-                    <input type="password" id="password" name="password" required>
-                    <div class="form-feedback" id="passwordFeedback"></div>
-                </div>
-                <button type="submit" class="submit-btn">Sign Up</button>
-            </form>
-        </section>
-    </div>
     <script>
-        // 1. Event Handling
-        // Button click: Change text and color
-        const changeBtn = document.getElementById('changeBtn');
-        let changed = false;
-        changeBtn.addEventListener('click', () => {
-            changed = !changed;
-            changeBtn.textContent = changed ? "You Clicked Me! 🎉" : "Click Me!";
-            changeBtn.style.background = changed ? "#fc5c7d" : "#6a82fb";
-            changeBtn.style.transform = changed ? "scale(1.08) rotate(2deg)" : "";
-        });
-
-        // Hover effect: Animate button
-        changeBtn.addEventListener('mouseenter', () => {
-            changeBtn.style.boxShadow = "0 4px 16px #fc5c7d55";
-        });
-        changeBtn.addEventListener('mouseleave', () => {
-            changeBtn.style.boxShadow = "";
-        });
-
-        // Keypress detection
-        const keypressDisplay = document.getElementById('keypressDisplay');
-        document.addEventListener('keydown', (e) => {
-            keypressDisplay.textContent = `You pressed: "${e.key}"`;
-            keypressDisplay.style.color = "#fc5c7d";
-            setTimeout(() => {
-                keypressDisplay.style.color = "#6a82fb";
-            }, 300);
-        });
-
-        // Bonus: Secret action for double-click or long press
-        const secretBtn = document.getElementById('secretBtn');
-        let pressTimer;
-        secretBtn.addEventListener('dblclick', () => {
-            secretBtn.textContent = "🎉 Secret Unlocked!";
-            secretBtn.style.background = "#4e54c8";
-            setTimeout(() => {
-                secretBtn.textContent = "Secret Action";
-                secretBtn.style.background = "#6a82fb";
-            }, 1500);
-        });
-        secretBtn.addEventListener('mousedown', () => {
-            pressTimer = setTimeout(() => {
-                secretBtn.textContent = "🔒 Long Press Magic!";
-                secretBtn.style.background = "#222";
-                setTimeout(() => {
-                    secretBtn.textContent = "Secret Action";
-                    secretBtn.style.background = "#6a82fb";
-                }, 1500);
-            }, 800);
-        });
-        secretBtn.addEventListener('mouseup', () => clearTimeout(pressTimer));
-        secretBtn.addEventListener('mouseleave', () => clearTimeout(pressTimer));
-
-        // 2. Interactive Elements
-        // Image Gallery/Slideshow
-        const galleryImages = [
-            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
-            "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80"
-        ];
-        let currentImg = 0;
-        const galleryImg = document.getElementById('galleryImg');
-        document.getElementById('prevImg').addEventListener('click', () => {
-            currentImg = (currentImg - 1 + galleryImages.length) % galleryImages.length;
-            galleryImg.src = galleryImages[currentImg];
-            galleryImg.classList.add('active');
-            setTimeout(() => galleryImg.classList.remove('active'), 300);
-        });
-        document.getElementById('nextImg').addEventListener('click', () => {
-            currentImg = (currentImg + 1) % galleryImages.length;
-            galleryImg.src = galleryImages[currentImg];
-            galleryImg.classList.add('active');
-            setTimeout(() => galleryImg.classList.remove('active'), 300);
-        });
-
-        // Tabs
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                tabBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                tabContents.forEach(tc => tc.style.display = 'none');
-                document.getElementById(btn.dataset.tab).style.display = 'block';
-            });
-        });
-
-        // Accordion
-        const accordionTitles = document.querySelectorAll('.accordion-title');
-        accordionTitles.forEach(title => {
-            title.addEventListener('click', () => {
-                const content = title.nextElementSibling;
-                const isActive = content.classList.contains('active');
-                document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('active'));
-                if (!isActive) content.classList.add('active');
-            });
-        });
-
-        // 3. Form Validation
-        const signupForm = document.getElementById('signupForm');
-        const nameInput = document.getElementById('name');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const nameFeedback = document.getElementById('nameFeedback');
-        const emailFeedback = document.getElementById('emailFeedback');
-        const passwordFeedback = document.getElementById('passwordFeedback');
-
-        // Helper functions
-        function validateName(name) {
-            return name.trim().length > 0;
-        }
-        function validateEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
-        function validatePassword(password) {
-            return password.length >= 8;
+        // Store and retrieve user preferences (theme) using localStorage
+        function setTheme(theme) {
+            document.body.classList.toggle('dark', theme === 'dark');
+            localStorage.setItem('theme', theme);
         }
 
-        // Real-time feedback
-        nameInput.addEventListener('input', () => {
-            if (!validateName(nameInput.value)) {
-                nameFeedback.textContent = "Name is required.";
-                nameFeedback.className = "form-feedback error";
-            } else {
-                nameFeedback.textContent = "Looks good!";
-                nameFeedback.className = "form-feedback success";
-            }
-        });
-        emailInput.addEventListener('input', () => {
-            if (!validateEmail(emailInput.value)) {
-                emailFeedback.textContent = "Please enter a valid email.";
-                emailFeedback.className = "form-feedback error";
-            } else {
-                emailFeedback.textContent = "Valid email!";
-                emailFeedback.className = "form-feedback success";
-            }
-        });
-        passwordInput.addEventListener('input', () => {
-            if (!validatePassword(passwordInput.value)) {
-                passwordFeedback.textContent = "Password must be at least 8 characters.";
-                passwordFeedback.className = "form-feedback error";
-            } else {
-                passwordFeedback.textContent = "Strong password!";
-                passwordFeedback.className = "form-feedback success";
-            }
+        function getTheme() {
+            return localStorage.getItem('theme') || 'light';
+        }
+
+        // Apply saved theme on load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTheme(getTheme());
         });
 
-        // On submit
-        signupForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            let valid = true;
-            if (!validateName(nameInput.value)) {
-                nameFeedback.textContent = "Name is required.";
-                nameFeedback.className = "form-feedback error";
-                valid = false;
-            }
-            if (!validateEmail(emailInput.value)) {
-                emailFeedback.textContent = "Please enter a valid email.";
-                emailFeedback.className = "form-feedback error";
-                valid = false;
-            }
-            if (!validatePassword(passwordInput.value)) {
-                passwordFeedback.textContent = "Password must be at least 8 characters.";
-                passwordFeedback.className = "form-feedback error";
-                valid = false;
-            }
-            if (valid) {
-                alert("Signup successful! 🎉");
-                signupForm.reset();
-                nameFeedback.textContent = "";
-                emailFeedback.textContent = "";
-                passwordFeedback.textContent = "";
-            }
+        // Theme toggle button
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            const newTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        // Animation triggered by user action
+        const animateBtn = document.getElementById('animateBtn');
+        animateBtn.addEventListener('click', () => {
+            animateBtn.classList.remove('pulse'); // Reset animation
+            void animateBtn.offsetWidth; // Force reflow
+            animateBtn.classList.add('pulse');
         });
     </script>
 </body>
